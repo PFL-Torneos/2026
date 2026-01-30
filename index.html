@@ -211,6 +211,108 @@
     @media (max-width: 600px){
       .logo{ max-width:130px; }
     }
+    /* ===== Modal (imagen) ===== */
+.modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding: 18px;
+  z-index: 9999;
+}
+
+.modal.open{ display:flex; }
+
+.modalCard{
+  width: min(920px, 96vw);
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+}
+
+.modalTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding: 12px 14px;
+  color:#fff;
+}
+
+.modalTop strong{ font-size:14px; letter-spacing:.2px; }
+
+.modalClose{
+  background: rgba(255,255,255,.12);
+  color:#fff;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor:pointer;
+  font-weight:800;
+}
+
+.modalBody{
+  background:#fff;
+  padding: 10px;
+}
+
+.modalBody img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius: 12px;
+}
+
+/* ===== Header con zona derecha para botón ===== */
+header{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+/* contenedor de logo + textos (izquierda) */
+.headerLeft{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap: 10px;
+}
+
+/* zona derecha del header (tu área amarilla) */
+.headerRight{
+  display:flex;
+  justify-content:flex-end;
+  align-items:flex-start;
+}
+
+/* botón tablas */
+.btnTables{
+  background: var(--blue);
+  color:#fff;
+  border:0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 900;
+  cursor:pointer;
+  box-shadow: 0 12px 26px rgba(37,99,235,.18);
+  white-space: nowrap;
+}
+
+.btnTables:hover{ filter: brightness(1.05); }
+
+@media (max-width: 880px){
+  header{ grid-template-columns: 1fr; }
+  .headerRight{ justify-content:center; }
+}
+
   </style>
 </head>
 
@@ -218,18 +320,40 @@
   <div class="wrap">
     <div class="card">
 
-      <header>
-        <div class="logoWrap">
-          <img src="pfl-logo.jpg" alt="Premier Fishing League" class="logo">
-        </div>
+     <header>
+  <div class="headerLeft">
+    <div class="logoWrap">
+      <img src="pfl-logo.jpg" alt="Premier Fishing League" class="logo">
+    </div>
 
-        <div>
-          <h1>🎣 Registro Torneo</h1>
-          <p class="sub">Inscripción rápida por categorías</p>
-        </div>
+    <div>
+      <h1>🎣 Registro Torneo</h1>
+      <p class="sub">Inscripción rápida por categorías</p>
+    </div>
 
-        <span class="badge">📌 Completa el formulario y se envía por WhatsApp</span>
-      </header>
+    <span class="badge">📌 Completa el formulario y se envía por WhatsApp</span>
+  </div>
+
+  <!-- ✅ BOTÓN EN ÁREA AMARILLA -->
+  <div class="headerRight">
+    <button class="btnTables" type="button" onclick="openPayments()">
+      💳 Tablas de pagos
+    </button>
+  </div>
+</header>
+
+      <!-- ✅ MODAL TABLAS DE PAGOS -->
+<div class="modal" id="paymentsModal">
+  <div class="modalCard">
+    <div class="modalTop">
+      <strong>💳 Tablas de pagos</strong>
+      <button class="modalClose" type="button" onclick="closePayments()">Cerrar ✕</button>
+    </div>
+    <div class="modalBody">
+      <img src="tabla-pagos.jepg" alt="Tablas de pagos">
+    </div>
+  </div>
+</div>
 
       <!-- ✅ CATEGORÍAS -->
       <div class="grid">
